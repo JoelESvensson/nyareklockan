@@ -487,6 +487,46 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .train-countdown {
+                padding: 10px 14px;
+                margin-top: 15px;
+                gap: 10px;
+            }
+            
+            .train-icon {
+                font-size: 1.6rem;
+            }
+            
+            .train-title {
+                font-size: 0.7rem;
+            }
+            
+            .train-time {
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .train-countdown {
+                padding: 8px 12px;
+                gap: 8px;
+            }
+            
+            .train-icon {
+                font-size: 1.3rem;
+            }
+            
+            .train-title {
+                font-size: 0.6rem;
+            }
+            
+            .train-time {
+                font-size: 0.95rem;
+            }
+        }
+
         .celebration h1 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 12vw;
@@ -847,7 +887,7 @@
             color: #00ff00;
         }
 
-        /* Responsive */
+        /* Responsive - Tablets and small laptops */
         @media (max-width: 768px) {
             .time-value {
                 font-size: 3.5rem;
@@ -870,6 +910,7 @@
             
             .year-display {
                 font-size: 2.5rem;
+                letter-spacing: 8px;
             }
 
             .logo {
@@ -882,6 +923,158 @@
 
             .ski-decor {
                 display: none;
+            }
+
+            .are-sign {
+                font-size: 0.9rem;
+                padding: 8px 20px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .message-box {
+                font-size: 1.2rem;
+                padding: 15px 25px;
+            }
+        }
+
+        /* Responsive - Mobile phones */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+
+            .year-display {
+                font-size: 1.8rem;
+                letter-spacing: 5px;
+                margin-bottom: 15px;
+            }
+
+            .countdown {
+                gap: 6px;
+            }
+
+            .time-value {
+                font-size: 2.2rem;
+                min-width: 55px;
+                padding: 10px 8px;
+                border-radius: 10px;
+            }
+
+            .time-label {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+                margin-top: 8px;
+            }
+
+            .separator {
+                font-size: 2rem;
+                margin: 0 -2px;
+                margin-bottom: 15px;
+            }
+
+            .countdown-container {
+                padding: 20px 10px;
+            }
+
+            .are-sign {
+                font-size: 0.75rem;
+                padding: 6px 15px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .message-box {
+                font-size: 1rem;
+                padding: 12px 18px;
+            }
+
+            .celebration h1 {
+                font-size: 2.5rem;
+            }
+
+            .celebration p {
+                font-size: 1.5rem;
+            }
+
+            /* Giant countdown for mobile */
+            .giant-countdown .seconds-display {
+                font-size: 30vw;
+            }
+
+            .giant-countdown .countdown-label {
+                font-size: 1.2rem;
+            }
+
+            /* Gondolas smaller on mobile */
+            .gondola {
+                font-size: 1.5rem;
+            }
+
+            /* Mountains scale better */
+            .mountain-1 {
+                border-width: 0 150px 250px 150px;
+            }
+            .mountain-2 {
+                border-width: 0 175px 300px 175px;
+            }
+            .mountain-3 {
+                border-width: 0 200px 350px 200px;
+            }
+            .mountain-4 {
+                border-width: 0 180px 280px 180px;
+            }
+
+            /* Snow caps adjust */
+            .snow-cap-1, .snow-cap-2, .snow-cap-3, .snow-cap-4 {
+                display: none;
+            }
+        }
+
+        /* Responsive - Very small phones */
+        @media (max-width: 360px) {
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .year-display {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+
+            .time-value {
+                font-size: 1.8rem;
+                min-width: 45px;
+                padding: 8px 6px;
+            }
+
+            .time-label {
+                font-size: 0.55rem;
+            }
+
+            .separator {
+                font-size: 1.6rem;
+            }
+
+            .countdown-container {
+                padding: 15px 8px;
+            }
+
+            .message-box {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+
+            .are-sign {
+                font-size: 0.65rem;
+                padding: 5px 12px;
+            }
+
+            .giant-countdown .seconds-display {
+                font-size: 35vw;
             }
         }
     </style>
