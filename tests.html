@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#NyÅreKlockan - Test Suite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00d4ff;
+        }
+        
+        .test-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .test-section {
+            background: #16213e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-section h2 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .test-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            background: #0f3460;
+            border-radius: 8px;
+            border-left: 4px solid #666;
+        }
+        
+        .test-item.pass {
+            border-left-color: #00ff88;
+        }
+        
+        .test-item.fail {
+            border-left-color: #ff4444;
+        }
+        
+        .test-item.pending {
+            border-left-color: #ffaa00;
+        }
+        
+        .test-name {
+            flex: 1;
+        }
+        
+        .test-status {
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .test-status.pass {
+            background: #00ff88;
+            color: #000;
+        }
+        
+        .test-status.fail {
+            background: #ff4444;
+            color: #fff;
+        }
+        
+        .test-status.pending {
+            background: #ffaa00;
+            color: #000;
+        }
+        
+        .controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background: #00a0cc;
+            transform: translateY(-2px);
+        }
+        
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .summary {
+            text-align: center;
+            padding: 20px;
+            background: #16213e;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .summary-stat {
+            display: inline-block;
+            margin: 0 20px;
+            font-size: 24px;
+        }
+        
+        .summary-stat.passed {
+            color: #00ff88;
+        }
+        
+        .summary-stat.failed {
+            color: #ff4444;
+        }
+        
+        .iframe-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 300px;
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 100;
+            display: none;
+        }
+        
+        .iframe-container.visible {
+            display: block;
+        }
+        
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .iframe-header {
+            background: #00d4ff;
+            color: #000;
+            padding: 5px 10px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .close-iframe {
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .log {
+            background: #0a0a15;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .log-entry {
+            padding: 3px 0;
+            border-bottom: 1px solid #222;
+        }
+        
+        .log-entry.error {
+            color: #ff4444;
+        }
+        
+        .log-entry.success {
+            color: #00ff88;
+        }
+        
+        .log-entry.info {
+            color: #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎿 #NyÅreKlockan Test Suite 🏔️</h1>
+        
+        <div class="controls">
+            <button id="runAll">▶️ Run All Tests</button>
+            <button id="togglePreview">👁️ Toggle Preview</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔧 DOM Elements Tests</h2>
+            <div id="dom-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>⏱️ Countdown Logic Tests</h2>
+            <div id="countdown-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🎭 Dramatic Mode Tests</h2>
+            <div id="dramatic-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🎉 Celebration Tests</h2>
+            <div id="celebration-tests"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🛠️ Dev Mode Tests</h2>
+            <div id="dev-tests"></div>
+        </div>
+        
+        <div class="summary" id="summary" style="display: none;">
+            <h2>Test Results</h2>
+            <div class="summary-stat passed">✅ Passed: <span id="passed-count">0</span></div>
+            <div class="summary-stat failed">❌ Failed: <span id="failed-count">0</span></div>
+        </div>
+        
+        <div class="log" id="log"></div>
+    </div>
+    
+    <div class="iframe-container" id="preview">
+        <div class="iframe-header">
+            <span>Live Preview</span>
+            <span class="close-iframe" id="closePreview">✕</span>
+        </div>
+        <iframe id="testFrame" src="index.html"></iframe>
+    </div>
+
+    <script>
+        // Test framework
+        const tests = [];
+        let passedCount = 0;
+        let failedCount = 0;
+        let iframe = null;
+        let iframeWindow = null;
+        let iframeDocument = null;
+        
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logEl.insertBefore(entry, logEl.firstChild);
+        }
+        
+        function addTest(section, name, testFn) {
+            tests.push({ section, name, testFn, status: 'pending' });
+        }
+        
+        function renderTests() {
+            const sections = {
+                'dom-tests': [],
+                'countdown-tests': [],
+                'dramatic-tests': [],
+                'celebration-tests': [],
+                'dev-tests': []
+            };
+            
+            tests.forEach((test, index) => {
+                if (sections[test.section]) {
+                    sections[test.section].push({ ...test, index });
+                }
+            });
+            
+            Object.entries(sections).forEach(([sectionId, sectionTests]) => {
+                const container = document.getElementById(sectionId);
+                container.innerHTML = sectionTests.map(test => `
+                    <div class="test-item ${test.status}" id="test-${test.index}">
+                        <span class="test-name">${test.name}</span>
+                        <span class="test-status ${test.status}">${test.status.toUpperCase()}</span>
+                    </div>
+                `).join('');
+            });
+        }
+        
+        function updateTest(index, status) {
+            tests[index].status = status;
+            const el = document.getElementById(`test-${index}`);
+            if (el) {
+                el.className = `test-item ${status}`;
+                el.querySelector('.test-status').className = `test-status ${status}`;
+                el.querySelector('.test-status').textContent = status.toUpperCase();
+            }
+        }
+        
+        async function runTests() {
+            passedCount = 0;
+            failedCount = 0;
+            
+            log('Starting test suite...', 'info');
+            
+            // Wait for iframe to load
+            await new Promise(resolve => {
+                iframe = document.getElementById('testFrame');
+                if (iframe.contentDocument.readyState === 'complete') {
+                    resolve();
+                } else {
+                    iframe.onload = resolve;
+                }
+            });
+            
+            iframeWindow = iframe.contentWindow;
+            iframeDocument = iframe.contentDocument;
+            
+            log('Iframe loaded, running tests...', 'info');
+            
+            for (let i = 0; i < tests.length; i++) {
+                const test = tests[i];
+                try {
+                    log(`Running: ${test.name}`, 'info');
+                    await test.testFn(iframeWindow, iframeDocument);
+                    updateTest(i, 'pass');
+                    passedCount++;
+                    log(`✅ PASS: ${test.name}`, 'success');
+                } catch (error) {
+                    updateTest(i, 'fail');
+                    failedCount++;
+                    log(`❌ FAIL: ${test.name} - ${error.message}`, 'error');
+                }
+                
+                // Small delay between tests
+                await new Promise(r => setTimeout(r, 50));
+            }
+            
+            document.getElementById('summary').style.display = 'block';
+            document.getElementById('passed-count').textContent = passedCount;
+            document.getElementById('failed-count').textContent = failedCount;
+            
+            log(`Test suite complete: ${passedCount} passed, ${failedCount} failed`, 
+                failedCount === 0 ? 'success' : 'error');
+        }
+        
+        function assert(condition, message) {
+            if (!condition) {
+                throw new Error(message || 'Assertion failed');
+            }
+        }
+        
+        function assertExists(element, name) {
+            if (!element) {
+                throw new Error(`Element "${name}" does not exist`);
+            }
+        }
+        
+        // ==========================================
+        // DOM ELEMENT TESTS
+        // ==========================================
+        
+        addTest('dom-tests', 'Countdown container exists', (win, doc) => {
+            assertExists(doc.getElementById('countdown-container'), 'countdown-container');
+        });
+        
+        addTest('dom-tests', 'Days element exists', (win, doc) => {
+            assertExists(doc.getElementById('days'), 'days');
+        });
+        
+        addTest('dom-tests', 'Hours element exists', (win, doc) => {
+            assertExists(doc.getElementById('hours'), 'hours');
+        });
+        
+        addTest('dom-tests', 'Minutes element exists', (win, doc) => {
+            assertExists(doc.getElementById('minutes'), 'minutes');
+        });
+        
+        addTest('dom-tests', 'Seconds element exists', (win, doc) => {
+            assertExists(doc.getElementById('seconds'), 'seconds');
+        });
+        
+        addTest('dom-tests', 'Celebration element exists', (win, doc) => {
+            assertExists(doc.getElementById('celebration'), 'celebration');
+        });
+        
+        addTest('dom-tests', 'Fireworks canvas exists', (win, doc) => {
+            assertExists(doc.getElementById('fireworks-canvas'), 'fireworks-canvas');
+        });
+        
+        addTest('dom-tests', 'Giant countdown element exists', (win, doc) => {
+            assertExists(doc.getElementById('giant-countdown'), 'giant-countdown');
+        });
+        
+        addTest('dom-tests', 'Dramatic overlay exists', (win, doc) => {
+            assertExists(doc.getElementById('dramatic-overlay'), 'dramatic-overlay');
+        });
+        
+        addTest('dom-tests', 'Dev panel exists', (win, doc) => {
+            assertExists(doc.getElementById('dev-panel'), 'dev-panel');
+        });
+        
+        addTest('dom-tests', 'Aurora element exists', (win, doc) => {
+            assertExists(doc.querySelector('.aurora'), 'aurora');
+        });
+        
+        addTest('dom-tests', 'Mountains element exists', (win, doc) => {
+            assertExists(doc.querySelector('.mountains'), 'mountains');
+        });
+        
+        addTest('dom-tests', 'Snowflakes container exists', (win, doc) => {
+            assertExists(doc.getElementById('snowflakes'), 'snowflakes');
+        });
+        
+        addTest('dom-tests', 'Stars container exists', (win, doc) => {
+            assertExists(doc.getElementById('stars'), 'stars');
+        });
+        
+        // ==========================================
+        // COUNTDOWN LOGIC TESTS
+        // ==========================================
+        
+        addTest('countdown-tests', 'getDistance function exists', (win, doc) => {
+            assert(typeof win.getDistance === 'function', 'getDistance should be a function');
+        });
+        
+        addTest('countdown-tests', 'updateCountdown function exists', (win, doc) => {
+            assert(typeof win.updateCountdown === 'function', 'updateCountdown should be a function');
+        });
+        
+        addTest('countdown-tests', 'Countdown displays valid numbers', (win, doc) => {
+            const days = doc.getElementById('days').textContent;
+            const hours = doc.getElementById('hours').textContent;
+            const minutes = doc.getElementById('minutes').textContent;
+            const seconds = doc.getElementById('seconds').textContent;
+            
+            assert(/^\d{2}$/.test(days), 'Days should be 2 digits');
+            assert(/^\d{2}$/.test(hours), 'Hours should be 2 digits');
+            assert(/^\d{2}$/.test(minutes), 'Minutes should be 2 digits');
+            assert(/^\d{2}$/.test(seconds), 'Seconds should be 2 digits');
+        });
+        
+        addTest('countdown-tests', 'Dev simulation can set distance', async (win, doc) => {
+            win.devSimulatedDistance = 300000; // 5 minutes
+            win.devCountdownActive = true;
+            
+            await new Promise(r => setTimeout(r, 200));
+            
+            const distance = win.getDistance();
+            assert(distance <= 300000, 'Distance should be set to simulated value');
+            
+            // Reset
+            win.devSimulatedDistance = null;
+            win.devCountdownActive = false;
+        });
+        
+        // ==========================================
+        // DRAMATIC MODE TESTS
+        // ==========================================
+        
+        addTest('dramatic-tests', 'dramaticMode variable exists', (win, doc) => {
+            assert(win.dramaticMode !== undefined, 'dramaticMode should exist');
+        });
+        
+        addTest('dramatic-tests', '10-minute mode activates correctly', async (win, doc) => {
+            // Simulate 5 minutes remaining
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 300000;
+            win.devCountdownActive = false; // Don't auto-decrement
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 100));
+            
+            assert(win.dramaticMode === '10min', `Expected 10min mode, got ${win.dramaticMode}`);
+            assert(doc.body.classList.contains('dramatic-10min'), 'Body should have dramatic-10min class');
+            
+            // Reset
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        addTest('dramatic-tests', '1-minute mode activates correctly', async (win, doc) => {
+            // Simulate 30 seconds remaining
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 30000;
+            win.devCountdownActive = false;
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 100));
+            
+            assert(win.dramaticMode === '1min', `Expected 1min mode, got ${win.dramaticMode}`);
+            assert(doc.body.classList.contains('dramatic-1min'), 'Body should have dramatic-1min class');
+            
+            // Reset
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        addTest('dramatic-tests', 'Final countdown mode activates correctly', async (win, doc) => {
+            // Simulate 5 seconds remaining
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 5000;
+            win.devCountdownActive = false;
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 100));
+            
+            assert(win.dramaticMode === 'final', `Expected final mode, got ${win.dramaticMode}`);
+            
+            // Reset
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        addTest('dramatic-tests', 'Seconds element changes color in 10min mode', async (win, doc) => {
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 300000;
+            win.devCountdownActive = false;
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 100));
+            
+            const secondsEl = doc.getElementById('seconds');
+            assert(secondsEl.style.color === 'rgb(255, 153, 0)', 'Seconds should be orange in 10min mode');
+            
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        addTest('dramatic-tests', 'Countdown container shakes in 1min mode', async (win, doc) => {
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 30000;
+            win.devCountdownActive = false;
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 100));
+            
+            const container = doc.getElementById('countdown-container');
+            assert(container.classList.contains('shake'), 'Container should have shake class');
+            assert(container.classList.contains('urgent'), 'Container should have urgent class');
+            
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        addTest('dramatic-tests', 'Giant countdown shows in final 10 seconds', async (win, doc) => {
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 5000;
+            win.devCountdownActive = false;
+            win.lastGiantNumber = -1;
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 200));
+            
+            const giantCountdown = doc.getElementById('giant-countdown');
+            assert(giantCountdown.classList.contains('visible'), 'Giant countdown should be visible');
+            assert(giantCountdown.textContent !== '', 'Giant countdown should have a number');
+            
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        // ==========================================
+        // CELEBRATION TESTS
+        // ==========================================
+        
+        addTest('celebration-tests', 'createFireworks function exists', (win, doc) => {
+            assert(typeof win.createFireworks === 'function', 'createFireworks should be a function');
+        });
+        
+        addTest('celebration-tests', 'stopFireworks function exists', (win, doc) => {
+            assert(typeof win.stopFireworks === 'function', 'stopFireworks should be a function');
+        });
+        
+        addTest('celebration-tests', 'Celebration activates when time reaches 0', async (win, doc) => {
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 0;
+            win.devCountdownActive = false;
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 300));
+            
+            const celebration = doc.getElementById('celebration');
+            assert(celebration.classList.contains('active'), 'Celebration should be active');
+            
+            // Reset
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        addTest('celebration-tests', 'Countdown container hides during celebration', async (win, doc) => {
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 0;
+            win.devCountdownActive = false;
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 300));
+            
+            const container = doc.querySelector('.container');
+            assert(container.style.display === 'none', 'Container should be hidden during celebration');
+            
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        addTest('celebration-tests', 'Fireworks instance is created', async (win, doc) => {
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 0;
+            win.devCountdownActive = false;
+            
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 500));
+            
+            assert(win.fireworksInstance !== null, 'Fireworks instance should be created');
+            
+            win.devSimulatedDistance = null;
+            win.resetDramaticEffects();
+        });
+        
+        addTest('celebration-tests', 'Reset clears celebration', async (win, doc) => {
+            // First trigger celebration
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = 0;
+            win.devCountdownActive = false;
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 300));
+            
+            // Now reset
+            win.resetDramaticEffects();
+            await new Promise(r => setTimeout(r, 200));
+            
+            const celebration = doc.getElementById('celebration');
+            assert(!celebration.classList.contains('active'), 'Celebration should not be active after reset');
+            
+            const container = doc.querySelector('.container');
+            assert(container.style.display !== 'none', 'Container should be visible after reset');
+            
+            win.devSimulatedDistance = null;
+        });
+        
+        addTest('celebration-tests', 'Celebration text shows "GOTT NYTT ÅR!"', (win, doc) => {
+            const h1 = doc.querySelector('#celebration h1');
+            assert(h1, 'Celebration h1 should exist');
+            assert(h1.textContent.includes('GOTT NYTT ÅR'), 'Should display GOTT NYTT ÅR');
+        });
+        
+        // ==========================================
+        // DEV MODE TESTS
+        // ==========================================
+        
+        addTest('dev-tests', 'Dev panel toggle button exists', (win, doc) => {
+            assertExists(doc.getElementById('dev-toggle'), 'dev-toggle');
+        });
+        
+        addTest('dev-tests', 'Dev panel is hidden by default', (win, doc) => {
+            const panel = doc.getElementById('dev-panel');
+            assert(!panel.classList.contains('visible'), 'Dev panel should be hidden by default');
+        });
+        
+        addTest('dev-tests', 'Dev presets dropdown exists', (win, doc) => {
+            assertExists(doc.getElementById('dev-time-preset'), 'dev-time-preset');
+        });
+        
+        addTest('dev-tests', 'resetDramaticEffects function exists', (win, doc) => {
+            assert(typeof win.resetDramaticEffects === 'function', 'resetDramaticEffects should be a function');
+        });
+        
+        addTest('dev-tests', 'Dev simulation variables exist', (win, doc) => {
+            assert(win.devSimulatedDistance !== undefined, 'devSimulatedDistance should exist');
+            assert(win.devCountdownActive !== undefined, 'devCountdownActive should exist');
+        });
+        
+        addTest('dev-tests', 'Reset restores normal mode', async (win, doc) => {
+            // Set some dramatic state
+            win.devSimulatedDistance = 30000;
+            win.devCountdownActive = false;
+            win.updateCountdown();
+            await new Promise(r => setTimeout(r, 100));
+            
+            // Reset
+            win.resetDramaticEffects();
+            win.devSimulatedDistance = null;
+            await new Promise(r => setTimeout(r, 100));
+            
+            assert(win.dramaticMode === 'normal', 'Should be in normal mode after reset');
+            assert(!doc.body.classList.contains('dramatic-10min'), 'Should not have 10min class');
+            assert(!doc.body.classList.contains('dramatic-1min'), 'Should not have 1min class');
+        });
+        
+        // ==========================================
+        // Initialize and run
+        // ==========================================
+        
+        renderTests();
+        
+        document.getElementById('runAll').addEventListener('click', async () => {
+            document.getElementById('runAll').disabled = true;
+            document.getElementById('runAll').textContent = '⏳ Running...';
+            
+            // Reset tests
+            tests.forEach((test, i) => {
+                test.status = 'pending';
+            });
+            renderTests();
+            
+            // Reload iframe to get fresh state
+            const iframe = document.getElementById('testFrame');
+            iframe.src = iframe.src;
+            
+            await new Promise(r => setTimeout(r, 1000));
+            await runTests();
+            
+            document.getElementById('runAll').disabled = false;
+            document.getElementById('runAll').textContent = '▶️ Run All Tests';
+        });
+        
+        document.getElementById('togglePreview').addEventListener('click', () => {
+            document.getElementById('preview').classList.toggle('visible');
+        });
+        
+        document.getElementById('closePreview').addEventListener('click', () => {
+            document.getElementById('preview').classList.remove('visible');
+        });
+        
+        log('Test suite loaded. Click "Run All Tests" to start.', 'info');
+    </script>
+</body>
+</html>

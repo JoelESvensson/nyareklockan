@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Playwright
+playwright-report/
+playwright/.cache/
+test-results/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*

@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎿 #NyÅreKlockan 2026 🏔️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(180deg, 
+                #0a1628 0%, 
+                #1a3a5c 30%, 
+                #2d5a7b 50%,
+                #4a7c9b 70%,
+                #87a5b8 100%
+            );
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        body.dramatic-10min {
+            background: linear-gradient(180deg, 
+                #0a0a1a 0%, 
+                #1a2040 30%, 
+                #2a3050 50%,
+                #3a4060 70%,
+                #5a6080 100%
+            );
+        }
+
+        body.dramatic-1min {
+            background: linear-gradient(180deg, 
+                #1a0000 0%, 
+                #2a0a0a 30%, 
+                #3a1010 50%,
+                #4a1515 70%,
+                #5a2020 100%
+            );
+            animation: dramaticPulse 0.5s ease-in-out infinite;
+        }
+
+        @keyframes dramaticPulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        /* Aurora Borealis Effect */
+        .aurora {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0, 255, 128, 0.1) 40%,
+                rgba(0, 200, 255, 0.15) 50%,
+                rgba(128, 0, 255, 0.1) 60%,
+                transparent 70%
+            );
+            filter: blur(60px);
+            animation: aurora 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes aurora {
+            0%, 100% { transform: translateX(-20%) skewX(-5deg); opacity: 0.5; }
+            50% { transform: translateX(20%) skewX(5deg); opacity: 0.8; }
+        }
+
+        /* Stars */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Mountains */
+        .mountains {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 45%;
+            pointer-events: none;
+        }
+
+        .mountain {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .mountain-1 {
+            left: -5%;
+            border-width: 0 200px 350px 200px;
+            border-color: transparent transparent #1a2a3a transparent;
+        }
+
+        .mountain-2 {
+            left: 15%;
+            border-width: 0 250px 450px 250px;
+            border-color: transparent transparent #243444 transparent;
+        }
+
+        .mountain-3 {
+            left: 45%;
+            border-width: 0 300px 500px 300px;
+            border-color: transparent transparent #1e2e3e transparent;
+        }
+
+        .mountain-4 {
+            right: -10%;
+            border-width: 0 280px 420px 280px;
+            border-color: transparent transparent #2a3a4a transparent;
+        }
+
+        /* Snow caps */
+        .snow-cap {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .snow-cap-1 {
+            left: calc(-5% + 140px);
+            border-width: 0 60px 80px 60px;
+            border-color: transparent transparent #e8f4fc transparent;
+            bottom: 270px;
+        }
+
+        .snow-cap-2 {
+            left: calc(15% + 175px);
+            border-width: 0 75px 100px 75px;
+            border-color: transparent transparent #f0f8ff transparent;
+            bottom: 350px;
+        }
+
+        .snow-cap-3 {
+            left: calc(45% + 210px);
+            border-width: 0 90px 120px 90px;
+            border-color: transparent transparent #e8f4fc transparent;
+            bottom: 380px;
+        }
+
+        .snow-cap-4 {
+            right: calc(-10% + 200px);
+            border-width: 0 80px 100px 80px;
+            border-color: transparent transparent #f0f8ff transparent;
+            bottom: 320px;
+        }
+
+        /* Ski slope lines */
+        .ski-slopes {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 45%;
+            pointer-events: none;
+        }
+
+        .slope-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.15);
+            height: 3px;
+            transform-origin: top left;
+        }
+
+        /* Snowflakes */
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 1rem;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main content */
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 0 0 30px rgba(0, 200, 255, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 8px;
+        }
+
+        .logo span {
+            color: #00d4ff;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .countdown-container {
+            background: rgba(0, 20, 40, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px 60px;
+            border: 2px solid rgba(0, 200, 255, 0.3);
+            box-shadow: 
+                0 0 60px rgba(0, 200, 255, 0.2),
+                inset 0 0 60px rgba(0, 200, 255, 0.05);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 60px rgba(0, 200, 255, 0.2), inset 0 0 60px rgba(0, 200, 255, 0.05); }
+            50% { box-shadow: 0 0 80px rgba(0, 200, 255, 0.4), inset 0 0 80px rgba(0, 200, 255, 0.1); }
+        }
+
+        .year-display {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: #00d4ff;
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.8);
+            margin-bottom: 20px;
+            letter-spacing: 15px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .time-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            color: white;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 0 40px rgba(0, 200, 255, 0.5);
+            line-height: 1;
+            min-width: 140px;
+            background: rgba(0, 50, 80, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(0, 200, 255, 0.2);
+        }
+
+        .time-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 15px;
+        }
+
+        .separator {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            color: #00d4ff;
+            align-self: center;
+            animation: blink 1s ease-in-out infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Ski icons decoration */
+        .ski-decor {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.6;
+        }
+
+        .ski-left {
+            left: 5%;
+            top: 20%;
+            transform: rotate(-15deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .ski-right {
+            right: 5%;
+            top: 25%;
+            transform: rotate(15deg);
+            animation: float 6s ease-in-out infinite 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-15deg); }
+            50% { transform: translateY(-20px) rotate(-10deg); }
+        }
+
+        /* Celebration mode */
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 500;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .celebration.active {
+            display: flex;
+        }
+
+        .fireworks-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .celebration-text {
+            z-index: 10;
+            text-align: center;
+            animation: celebrationFadeIn 1s ease-out;
+        }
+
+        @keyframes celebrationFadeIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Train sub-countdown */
+        .train-countdown {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 15px 25px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: trainPulse 3s ease-in-out infinite;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .train-countdown.departed {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        
+        @keyframes trainPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(100, 200, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(100, 200, 255, 0.5); }
+        }
+        
+        .train-icon {
+            font-size: 2.5rem;
+            animation: trainWobble 2s ease-in-out infinite;
+        }
+        
+        @keyframes trainWobble {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+        
+        .train-info {
+            text-align: left;
+        }
+        
+        .train-title {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+        
+        .train-time {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: #7dd3fc;
+            letter-spacing: 2px;
+        }
+        
+        .train-time span {
+            color: #fff;
+        }
+        
+        @media (max-width: 768px) {
+            .train-countdown {
+                padding: 12px 18px;
+                margin-top: 20px;
+            }
+            
+            .train-icon {
+                font-size: 2rem;
+            }
+            
+            .train-title {
+                font-size: 0.8rem;
+            }
+            
+            .train-time {
+                font-size: 1.4rem;
+            }
+        }
+
+        .celebration h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12vw;
+            color: #ffd700;
+            text-shadow: 
+                0 0 20px rgba(255, 215, 0, 1),
+                0 0 40px rgba(255, 215, 0, 0.8),
+                0 0 60px rgba(255, 215, 0, 0.6),
+                0 0 80px rgba(255, 100, 0, 0.4),
+                0 0 120px rgba(255, 50, 0, 0.3);
+            animation: celebratePulse 0.5s ease-in-out infinite alternate;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        @keyframes celebratePulse {
+            from { transform: scale(1); text-shadow: 0 0 20px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.6); }
+            to { transform: scale(1.05); text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 0.9), 0 0 90px rgba(255, 215, 0, 0.7), 0 0 120px rgba(255, 100, 0, 0.5); }
+        }
+
+        .celebration p {
+            font-size: 4vw;
+            color: white;
+            margin-top: 30px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .celebration .emoji-row {
+            font-size: 5vw;
+            margin-top: 20px;
+            animation: emojiFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Ski lift decoration */
+        .ski-lift {
+            position: absolute;
+            bottom: 35%;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(50, 50, 50, 0.8) 20%, 
+                rgba(50, 50, 50, 0.8) 80%, 
+                transparent 100%
+            );
+            pointer-events: none;
+        }
+
+        .lift-cable {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(100, 100, 100, 0.6);
+            top: -20px;
+        }
+
+        .gondola {
+            position: absolute;
+            font-size: 2rem;
+            animation: moveGondola 20s linear infinite;
+        }
+
+        @keyframes moveGondola {
+            0% { left: -5%; }
+            100% { left: 105%; }
+        }
+
+        /* Åre sign */
+        .are-sign {
+            position: absolute;
+            bottom: 25%;
+            right: 15%;
+            background: #8B4513;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: #f5f5dc;
+            transform: rotate(-5deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 3px solid #654321;
+        }
+
+        .are-sign::before {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 30px;
+            background: #654321;
+        }
+
+        /* Message */
+        .message {
+            margin-top: 40px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 
+                0 0 10px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(0, 0, 0, 0.6),
+                0 2px 4px rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            white-space: nowrap;
+        }
+
+        .message .emoji {
+            font-size: 1.5rem;
+        }
+
+        /* Dramatic 10-minute mode */
+        .dramatic-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .dramatic-overlay.active-10min {
+            opacity: 1;
+            background: radial-gradient(circle at center, transparent 30%, rgba(255, 100, 0, 0.1) 100%);
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+
+        .dramatic-overlay.active-1min {
+            opacity: 1;
+            background: radial-gradient(circle at center, transparent 20%, rgba(255, 0, 0, 0.3) 100%);
+            animation: urgentPulse 0.5s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes urgentPulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* Heartbeat ring effect */
+        .heartbeat-ring {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            pointer-events: none;
+            z-index: 6;
+            opacity: 0;
+        }
+
+        .heartbeat-ring.active-10min {
+            opacity: 1;
+            border-color: rgba(255, 150, 0, 0.5);
+            animation: heartbeat10 2s ease-in-out infinite;
+        }
+
+        .heartbeat-ring.active-1min {
+            opacity: 1;
+            border-color: rgba(255, 50, 50, 0.8);
+            animation: heartbeat1 0.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat10 {
+            0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.6; }
+        }
+
+        @keyframes heartbeat1 {
+            0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+        }
+
+        /* Shake effect for last minute */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .countdown-container.shake {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        /* Giant countdown for last 10 seconds */
+        .giant-countdown {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 40vw;
+            color: #ff0000;
+            text-shadow: 
+                0 0 50px rgba(255, 0, 0, 1),
+                0 0 100px rgba(255, 0, 0, 0.8),
+                0 0 150px rgba(255, 0, 0, 0.6);
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease;
+        }
+
+        .giant-countdown.visible {
+            opacity: 1;
+            animation: countdownPop 1s ease-out;
+        }
+
+        @keyframes countdownPop {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            20% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+        }
+
+        /* Flashing border for countdown container */
+        .countdown-container.urgent {
+            border-color: #ff0000 !important;
+            animation: borderFlash 0.3s ease-in-out infinite !important;
+        }
+
+        @keyframes borderFlash {
+            0%, 100% { border-color: #ff0000; box-shadow: 0 0 60px rgba(255, 0, 0, 0.8), inset 0 0 60px rgba(255, 0, 0, 0.2); }
+            50% { border-color: #ff6600; box-shadow: 0 0 100px rgba(255, 100, 0, 1), inset 0 0 100px rgba(255, 100, 0, 0.3); }
+        }
+
+        /* Screen flash */
+        .screen-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease;
+        }
+
+        .screen-flash.flash {
+            opacity: 0.8;
+        }
+
+        /* Dev Panel */
+        .dev-panel {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 1000;
+            font-family: monospace;
+            font-size: 12px;
+            color: #00ff00;
+            max-width: 280px;
+            display: none;
+        }
+
+        .dev-panel.visible {
+            display: block;
+        }
+
+        .dev-panel h3 {
+            margin: 0 0 10px 0;
+            color: #ff0;
+            font-size: 14px;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 5px;
+        }
+
+        .dev-panel label {
+            display: block;
+            margin: 8px 0 4px 0;
+            color: #0ff;
+        }
+
+        .dev-panel select,
+        .dev-panel input,
+        .dev-panel button {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            background: #111;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            border-radius: 5px;
+            font-family: monospace;
+            cursor: pointer;
+        }
+
+        .dev-panel button {
+            background: #003300;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .dev-panel button:hover {
+            background: #005500;
+        }
+
+        .dev-panel button.active {
+            background: #00aa00;
+            color: #000;
+        }
+
+        .dev-panel .status {
+            margin-top: 10px;
+            padding: 8px;
+            background: #001100;
+            border-radius: 5px;
+            font-size: 11px;
+        }
+
+        .dev-panel .hint {
+            color: #666;
+            font-size: 10px;
+            margin-top: 10px;
+        }
+
+        .dev-toggle {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            color: #666;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            cursor: pointer;
+            z-index: 999;
+            font-family: monospace;
+        }
+
+        .dev-toggle:hover {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .time-value {
+                font-size: 3.5rem;
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .countdown {
+                gap: 10px;
+            }
+            
+            .separator {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+            
+            .countdown-container {
+                padding: 30px 20px;
+            }
+            
+            .year-display {
+                font-size: 2.5rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .celebration h1 {
+                font-size: 4rem;
+            }
+
+            .ski-decor {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora"></div>
+    
+    <div class="stars" id="stars"></div>
+    
+    <div class="snowflakes" id="snowflakes"></div>
+    
+    <div class="mountains">
+        <div class="mountain mountain-1"></div>
+        <div class="snow-cap snow-cap-1"></div>
+        <div class="mountain mountain-2"></div>
+        <div class="snow-cap snow-cap-2"></div>
+        <div class="mountain mountain-3"></div>
+        <div class="snow-cap snow-cap-3"></div>
+        <div class="mountain mountain-4"></div>
+        <div class="snow-cap snow-cap-4"></div>
+    </div>
+
+    <div class="ski-lift">
+        <div class="lift-cable"></div>
+        <div class="gondola" style="animation-delay: 0s;">🚡</div>
+        <div class="gondola" style="animation-delay: -7s;">🚡</div>
+        <div class="gondola" style="animation-delay: -14s;">🚡</div>
+    </div>
+
+    <div class="are-sign">Åreskutan 1420 m.ö.h.</div>
+
+    <div class="ski-decor ski-left">🎿</div>
+    <div class="ski-decor ski-right">🏂</div>
+
+    <div class="container">
+        <div class="logo">🏔️ #NY<span>ÅRE</span>KLOCKAN 🎿</div>
+        <div class="subtitle">Åre Ski Resort Edition</div>
+        
+        <div class="countdown-container" id="countdown-container">
+            <div class="year-display" id="year-display">⏰</div>
+            <div class="countdown">
+                <div class="time-block">
+                    <div class="time-value" id="days">00</div>
+                    <div class="time-label">Dagar</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-block">
+                    <div class="time-value" id="hours">00</div>
+                    <div class="time-label">Timmar</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-block">
+                    <div class="time-value" id="minutes">00</div>
+                    <div class="time-label">Minuter</div>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-block">
+                    <div class="time-value" id="seconds">00</div>
+                    <div class="time-label">Sekunder</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message">
+            <span class="emoji">⛷️</span> Räkna ner till ett fantastiskt nytt år på fjället! <span class="emoji">🥂</span>
+        </div>
+        
+        <!-- Sub countdown for train departure -->
+        <div class="train-countdown" id="train-countdown">
+            <div class="train-icon">🚂</div>
+            <div class="train-info">
+                <div class="train-title">Nattåget avgår från Stockholm C</div>
+                <div class="train-time">
+                    <span id="train-days">0</span>d 
+                    <span id="train-hours">00</span>h 
+                    <span id="train-minutes">00</span>m 
+                    <span id="train-seconds">00</span>s
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <canvas class="fireworks-canvas" id="fireworks-canvas"></canvas>
+        <div class="celebration-text">
+            <h1>GOTT NYTT ÅR!</h1>
+            <p>Välkommen 2026!</p>
+            <div class="emoji-row">🎿 🏔️ 🥂 ⛷️ 🎉</div>
+        </div>
+    </div>
+
+    <!-- Dramatic overlay for final minutes -->
+    <div class="dramatic-overlay" id="dramatic-overlay"></div>
+    <div class="heartbeat-ring" id="heartbeat-ring"></div>
+
+    <!-- Giant countdown display -->
+    <div class="giant-countdown" id="giant-countdown"></div>
+    
+    <!-- Screen flash effect -->
+    <div class="screen-flash" id="screen-flash"></div>
+
+    <!-- Dev Mode Toggle -->
+    <button class="dev-toggle" id="dev-toggle" title="Press D to toggle">DEV</button>
+    
+    <!-- Dev Panel -->
+    <div class="dev-panel" id="dev-panel">
+        <h3>🛠️ DEV MODE</h3>
+        
+        <label>Simulate Time Remaining:</label>
+        <select id="dev-time-preset">
+            <option value="">-- Quick Presets --</option>
+            <option value="700000">11+ minutes (Normal)</option>
+            <option value="540000">9 minutes (10min mode)</option>
+            <option value="300000">5 minutes (10min mode)</option>
+            <option value="55000">55 seconds (1min mode)</option>
+            <option value="30000">30 seconds (1min mode)</option>
+            <option value="10000">10 seconds (Final!)</option>
+            <option value="5000">5 seconds (Final!)</option>
+            <option value="0">0 - Celebration!</option>
+        </select>
+        
+        <label>Custom Time (seconds):</label>
+        <input type="number" id="dev-custom-time" placeholder="Enter seconds..." min="0" max="86400">
+        <button id="dev-apply-custom">Apply Custom Time</button>
+        
+        <button id="dev-reset">Reset to Real Time</button>
+        
+        <div class="status">
+            <strong>Mode:</strong> <span id="dev-mode-display">normal</span><br>
+            <strong>Simulated:</strong> <span id="dev-simulated">No</span><br>
+            <strong>Time Left:</strong> <span id="dev-time-display">--</span>
+        </div>
+        
+        <div class="hint">Press D to toggle this panel</div>
+    </div>
+
+    <script>
+        // Main countdown: New Year's Eve 2026-01-01 00:00:00 +01:00 (CET)
+        const NEW_YEARS_TARGET = new Date('2026-01-01T00:00:00+01:00').getTime();
+        
+        // Sub countdown: Night train departure from Stockholm C
+        const TRAIN_DEPARTURE_TARGET = new Date('2025-12-27T22:40:00+01:00').getTime();
+        
+        // Main target is New Year's Eve
+        const REAL_TARGET_DATE = NEW_YEARS_TARGET;
+        
+        // Dev mode variables
+        let devMode = false;
+        let devSimulatedDistance = null;
+        let devCountdownActive = false;
+        let devIntervalId = null;
+        
+        // Get effective distance (real or simulated)
+        function getDistance() {
+            if (devSimulatedDistance !== null) {
+                return devSimulatedDistance;
+            }
+            return REAL_TARGET_DATE - new Date().getTime();
+        }
+        
+        // Dev panel controls
+        document.addEventListener('DOMContentLoaded', () => {
+            const devPanel = document.getElementById('dev-panel');
+            const devToggle = document.getElementById('dev-toggle');
+            const devPreset = document.getElementById('dev-time-preset');
+            const devCustomTime = document.getElementById('dev-custom-time');
+            const devApplyCustom = document.getElementById('dev-apply-custom');
+            const devReset = document.getElementById('dev-reset');
+            
+            // Toggle dev panel with D key or button
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'd' || e.key === 'D') {
+                    devPanel.classList.toggle('visible');
+                }
+            });
+            
+            devToggle.addEventListener('click', () => {
+                devPanel.classList.toggle('visible');
+            });
+            
+            // Preset selection
+            devPreset.addEventListener('change', (e) => {
+                if (e.target.value !== '') {
+                    resetDramaticEffects();
+                    devSimulatedDistance = parseInt(e.target.value);
+                    devCountdownActive = true;
+                    startDevCountdown();
+                    updateDevStatus();
+                }
+            });
+            
+            // Custom time
+            devApplyCustom.addEventListener('click', () => {
+                const seconds = parseInt(devCustomTime.value);
+                if (!isNaN(seconds) && seconds >= 0) {
+                    resetDramaticEffects();
+                    devSimulatedDistance = seconds * 1000;
+                    devCountdownActive = true;
+                    startDevCountdown();
+                    updateDevStatus();
+                }
+            });
+            
+            // Reset
+            devReset.addEventListener('click', () => {
+                if (devIntervalId) {
+                    clearInterval(devIntervalId);
+                    devIntervalId = null;
+                }
+                devSimulatedDistance = null;
+                devCountdownActive = false;
+                devPreset.value = '';
+                devCustomTime.value = '';
+                resetDramaticEffects();
+                updateDevStatus();
+            });
+        });
+        
+        // Dev countdown timer
+        function startDevCountdown() {
+            // Clear any existing interval first!
+            if (devIntervalId) {
+                clearInterval(devIntervalId);
+                devIntervalId = null;
+            }
+            
+            if (!devCountdownActive) return;
+            
+            devIntervalId = setInterval(() => {
+                if (!devCountdownActive || devSimulatedDistance === null) {
+                    clearInterval(devIntervalId);
+                    devIntervalId = null;
+                    return;
+                }
+                devSimulatedDistance = Math.max(0, devSimulatedDistance - 100);
+                updateDevStatus();
+            }, 100);
+        }
+        
+        // Update dev status display
+        function updateDevStatus() {
+            const modeDisplay = document.getElementById('dev-mode-display');
+            const simDisplay = document.getElementById('dev-simulated');
+            const timeDisplay = document.getElementById('dev-time-display');
+            
+            if (modeDisplay) modeDisplay.textContent = dramaticMode;
+            if (simDisplay) simDisplay.textContent = devSimulatedDistance !== null ? 'Yes' : 'No';
+            if (timeDisplay) {
+                const d = getDistance();
+                const mins = Math.floor(d / 60000);
+                const secs = Math.floor((d % 60000) / 1000);
+                timeDisplay.textContent = `${mins}m ${secs}s (${d}ms)`;
+            }
+        }
+        
+        // Reset all dramatic effects
+        function resetDramaticEffects() {
+            dramaticMode = 'normal';
+            lastGiantNumber = -1;
+            fireworksStarted = false;
+            
+            // Stop and clean up fireworks
+            stopFireworks();
+            
+            document.body.classList.remove('dramatic-10min', 'dramatic-1min');
+            document.getElementById('dramatic-overlay').classList.remove('active-10min', 'active-1min');
+            document.getElementById('heartbeat-ring').classList.remove('active-10min', 'active-1min');
+            document.getElementById('countdown-container').classList.remove('shake', 'urgent');
+            document.getElementById('countdown-container').style.transform = 'scale(1)';
+            document.getElementById('giant-countdown').classList.remove('visible');
+            
+            // Reset celebration
+            const celebration = document.getElementById('celebration');
+            celebration.classList.remove('active');
+            
+            const secondsEl = document.getElementById('seconds');
+            secondsEl.style.color = '';
+            secondsEl.style.textShadow = '';
+            secondsEl.style.transform = '';
+        }
+        
+        // Create stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create snowflakes
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            const snowflakeChars = ['❄', '❅', '❆', '✻', '✼', '❋'];
+            
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+                snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                snowflake.style.animationDelay = Math.random() * 10 + 's';
+                snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+
+        // Dramatic state tracking
+        let dramaticMode = 'normal';
+        let lastGiantNumber = -1;
+        let fireworksStarted = false;
+        let fireworksInstance = null;
+
+        // Countdown logic
+        function updateCountdown() {
+            const distance = getDistance();
+            
+            // Update dev status if panel is visible
+            updateDevStatus();
+
+            const overlay = document.getElementById('dramatic-overlay');
+            const ring = document.getElementById('heartbeat-ring');
+            const container = document.getElementById('countdown-container');
+            const giantCountdown = document.getElementById('giant-countdown');
+            const yearDisplay = document.getElementById('year-display');
+
+            if (distance <= 0) {
+                // Time's up!
+                document.getElementById('celebration').classList.add('active');
+                createFireworks();
+                giantCountdown.classList.remove('visible');
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const totalSeconds = Math.floor(distance / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            // Update year display based on time remaining
+            if (distance > 10 * 60 * 1000) {
+                yearDisplay.textContent = '⏰';
+            } else if (distance > 60 * 1000) {
+                yearDisplay.textContent = '🔥 SNART! 🔥';
+            } else {
+                yearDisplay.textContent = '💥 NU!! 💥';
+            }
+
+            // DRAMATIC MODE: Last 10 minutes (600000ms)
+            if (distance <= 10 * 60 * 1000 && distance > 60 * 1000) {
+                if (dramaticMode !== '10min') {
+                    dramaticMode = '10min';
+                    document.body.classList.add('dramatic-10min');
+                    document.body.classList.remove('dramatic-1min');
+                    overlay.classList.add('active-10min');
+                    overlay.classList.remove('active-1min');
+                    ring.classList.add('active-10min');
+                    ring.classList.remove('active-1min');
+                    container.classList.remove('shake', 'urgent');
+                }
+                
+                // Pulsing seconds
+                const secondsEl = document.getElementById('seconds');
+                secondsEl.style.color = '#ff9900';
+                secondsEl.style.textShadow = '0 0 30px rgba(255, 153, 0, 0.8)';
+                
+                // Intensify as we get closer
+                const intensity = 1 - (distance / (10 * 60 * 1000));
+                container.style.transform = `scale(${1 + intensity * 0.1})`;
+            }
+            
+            // ULTRA DRAMATIC MODE: Last 1 minute (60000ms)
+            else if (distance <= 60 * 1000 && distance > 10 * 1000) {
+                if (dramaticMode !== '1min') {
+                    dramaticMode = '1min';
+                    document.body.classList.remove('dramatic-10min');
+                    document.body.classList.add('dramatic-1min');
+                    overlay.classList.remove('active-10min');
+                    overlay.classList.add('active-1min');
+                    ring.classList.remove('active-10min');
+                    ring.classList.add('active-1min');
+                    container.classList.add('shake', 'urgent');
+                }
+                
+                // Red pulsing everything
+                const secondsEl = document.getElementById('seconds');
+                secondsEl.style.color = '#ff0000';
+                secondsEl.style.textShadow = '0 0 50px rgba(255, 0, 0, 1)';
+                secondsEl.style.transform = 'scale(1.2)';
+                
+                // Flash on each second
+                if (seconds !== lastGiantNumber) {
+                    lastGiantNumber = seconds;
+                    flashScreen();
+                }
+                
+                container.style.transform = 'scale(1.15)';
+            }
+            
+            // FINAL COUNTDOWN: Last 10 seconds
+            else if (distance <= 10 * 1000 && distance > 0) {
+                if (dramaticMode !== 'final') {
+                    dramaticMode = 'final';
+                    
+                    // Make sure all dramatic effects from previous stages are active
+                    document.body.classList.remove('dramatic-10min');
+                    document.body.classList.add('dramatic-1min');
+                    overlay.classList.remove('active-10min');
+                    overlay.classList.add('active-1min');
+                    ring.classList.remove('active-10min');
+                    ring.classList.add('active-1min');
+                    container.classList.add('shake', 'urgent');
+                    container.style.transform = 'scale(1.15)';
+                    
+                    const secondsEl = document.getElementById('seconds');
+                    secondsEl.style.color = '#ff0000';
+                    secondsEl.style.textShadow = '0 0 50px rgba(255, 0, 0, 1)';
+                    secondsEl.style.transform = 'scale(1.2)';
+                }
+                
+                // Show giant countdown number
+                const currentSecond = Math.ceil(distance / 1000);
+                if (currentSecond !== lastGiantNumber) {
+                    lastGiantNumber = currentSecond;
+                    giantCountdown.textContent = currentSecond;
+                    giantCountdown.classList.remove('visible');
+                    void giantCountdown.offsetWidth; // Trigger reflow
+                    giantCountdown.classList.add('visible');
+                    flashScreen();
+                    
+                    // Shake the whole page
+                    document.body.style.transform = 'translateX(' + (Math.random() * 10 - 5) + 'px)';
+                    setTimeout(() => {
+                        document.body.style.transform = 'translateX(0)';
+                    }, 100);
+                }
+            }
+            
+            // Normal mode (more than 10 minutes)
+            else if (distance > 10 * 60 * 1000) {
+                if (dramaticMode !== 'normal') {
+                    dramaticMode = 'normal';
+                    document.body.classList.remove('dramatic-10min', 'dramatic-1min');
+                    overlay.classList.remove('active-10min', 'active-1min');
+                    ring.classList.remove('active-10min', 'active-1min');
+                    container.classList.remove('shake', 'urgent');
+                    container.style.transform = 'scale(1)';
+                    
+                    const secondsEl = document.getElementById('seconds');
+                    secondsEl.style.color = '';
+                    secondsEl.style.textShadow = '';
+                    secondsEl.style.transform = '';
+                }
+            }
+        }
+        
+        // Screen flash effect
+        function flashScreen() {
+            const flash = document.getElementById('screen-flash');
+            flash.classList.add('flash');
+            setTimeout(() => {
+                flash.classList.remove('flash');
+            }, 100);
+        }
+
+        // Fireworks effect using fireworks.js
+        function createFireworks() {
+            if (fireworksStarted) return;
+            fireworksStarted = true;
+            
+            // Hide the main countdown container
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('giant-countdown').style.display = 'none';
+            document.querySelector('.aurora').style.display = 'none';
+            document.querySelector('.mountains').style.display = 'none';
+            document.querySelector('.ski-lift').style.display = 'none';
+            document.querySelector('.are-sign').style.display = 'none';
+            document.querySelectorAll('.ski-decor').forEach(el => el.style.display = 'none');
+            document.getElementById('dramatic-overlay').style.display = 'none';
+            document.getElementById('heartbeat-ring').style.display = 'none';
+            
+            // Initialize fireworks.js
+            const canvas = document.getElementById('fireworks-canvas');
+            fireworksInstance = new Fireworks.default(canvas, {
+                autoresize: true,
+                opacity: 0.5,
+                acceleration: 1.05,
+                friction: 0.97,
+                gravity: 1.5,
+                particles: 80,
+                traceLength: 3,
+                traceSpeed: 10,
+                explosion: 6,
+                intensity: 40,
+                flickering: 50,
+                lineStyle: 'round',
+                hue: {
+                    min: 0,
+                    max: 360
+                },
+                delay: {
+                    min: 15,
+                    max: 30
+                },
+                rocketsPoint: {
+                    min: 20,
+                    max: 80
+                },
+                lineWidth: {
+                    explosion: {
+                        min: 1,
+                        max: 4
+                    },
+                    trace: {
+                        min: 1,
+                        max: 2
+                    }
+                },
+                brightness: {
+                    min: 50,
+                    max: 80
+                },
+                decay: {
+                    min: 0.015,
+                    max: 0.03
+                },
+                mouse: {
+                    click: true,
+                    move: false,
+                    max: 3
+                }
+            });
+            
+            fireworksInstance.start();
+        }
+        
+        // Stop fireworks (for dev mode reset)
+        function stopFireworks() {
+            if (fireworksInstance) {
+                fireworksInstance.stop(true);
+                fireworksInstance = null;
+            }
+            
+            // Show the main elements again
+            document.querySelector('.container').style.display = '';
+            document.getElementById('giant-countdown').style.display = '';
+            document.querySelector('.aurora').style.display = '';
+            document.querySelector('.mountains').style.display = '';
+            document.querySelector('.ski-lift').style.display = '';
+            document.querySelector('.are-sign').style.display = '';
+            document.querySelectorAll('.ski-decor').forEach(el => el.style.display = '');
+            document.getElementById('dramatic-overlay').style.display = '';
+            document.getElementById('heartbeat-ring').style.display = '';
+        }
+
+        // Initialize
+        createStars();
+        createSnowflakes();
+        updateCountdown();
+        updateTrainCountdown();
+        setInterval(updateCountdown, 100); // Update more frequently for smoother effects
+        setInterval(updateTrainCountdown, 1000); // Update train countdown every second
+        
+        // Train countdown update function
+        function updateTrainCountdown() {
+            const trainContainer = document.getElementById('train-countdown');
+            
+            // Calculate train distance based on dev mode or real time
+            let distance;
+            if (devSimulatedDistance !== null) {
+                // Dev mode: Calculate train distance relative to simulated New Year's distance
+                // Train departs (NEW_YEARS_TARGET - TRAIN_DEPARTURE_TARGET) ms before New Year's
+                const trainToNewYearsDiff = NEW_YEARS_TARGET - TRAIN_DEPARTURE_TARGET;
+                distance = devSimulatedDistance - trainToNewYearsDiff;
+            } else {
+                // Real time
+                const now = new Date().getTime();
+                distance = TRAIN_DEPARTURE_TARGET - now;
+            }
+            
+            if (distance <= 0) {
+                // Train has departed - hide the countdown
+                trainContainer.classList.add('departed');
+                return;
+            } else {
+                // Train hasn't departed yet - make sure it's visible
+                trainContainer.classList.remove('departed');
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('train-days').textContent = days;
+            document.getElementById('train-hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('train-minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('train-seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Additional dramatic effects interval
+        setInterval(() => {
+            const distance = getDistance();
+            
+            // Add extra visual chaos in the last minute
+            if (distance <= 60 * 1000 && distance > 0) {
+                // Random sparkles
+                if (Math.random() > 0.7) {
+                    const sparkle = document.createElement('div');
+                    sparkle.style.cssText = `
+                        position: fixed;
+                        left: ${Math.random() * 100}%;
+                        top: ${Math.random() * 100}%;
+                        width: 10px;
+                        height: 10px;
+                        background: ${['#ff0', '#f0f', '#0ff', '#fff'][Math.floor(Math.random() * 4)]};
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 15;
+                        animation: explode 0.5s ease-out forwards;
+                    `;
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 500);
+                }
+            }
+        }, 100);
+        
+        // Expose functions globally for testing
+        window.getDistance = getDistance;
+        window.updateCountdown = updateCountdown;
+        window.createFireworks = createFireworks;
+        window.stopFireworks = stopFireworks;
+        window.resetDramaticEffects = resetDramaticEffects;
+        window.flashScreen = flashScreen;
+        
+        // Expose variables for testing (using getters/setters)
+        Object.defineProperty(window, 'dramaticMode', {
+            get: () => dramaticMode,
+            set: (v) => { dramaticMode = v; }
+        });
+        Object.defineProperty(window, 'lastGiantNumber', {
+            get: () => lastGiantNumber,
+            set: (v) => { lastGiantNumber = v; }
+        });
+        Object.defineProperty(window, 'fireworksStarted', {
+            get: () => fireworksStarted,
+            set: (v) => { fireworksStarted = v; }
+        });
+        Object.defineProperty(window, 'fireworksInstance', {
+            get: () => fireworksInstance,
+            set: (v) => { fireworksInstance = v; }
+        });
+        Object.defineProperty(window, 'devSimulatedDistance', {
+            get: () => devSimulatedDistance,
+            set: (v) => { devSimulatedDistance = v; }
+        });
+        Object.defineProperty(window, 'devCountdownActive', {
+            get: () => devCountdownActive,
+            set: (v) => { devCountdownActive = v; }
+        });
+    </script>
+</body>
+</html>
