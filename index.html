@@ -313,6 +313,11 @@
             animation-duration: calc(var(--base-duration, 15s) / var(--wind-speed-multiplier));
         }
 
+        .snowflakes .snowflake.from-side {
+            animation: fallFromSide linear infinite;
+            animation-duration: calc(var(--base-duration, 15s) / var(--wind-speed-multiplier));
+        }
+
         @keyframes fallWithWind {
             0% {
                 transform: translateY(-10vh) translateX(0) rotate(0deg);
@@ -326,6 +331,23 @@
             }
             100% {
                 transform: translateY(110vh) translateX(var(--wind-drift)) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fallFromSide {
+            0% {
+                transform: translateY(var(--start-y, 0vh)) translateX(-20vw) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(calc(var(--start-y, 0vh) + 110vh)) translateX(calc(var(--wind-drift) + 80vw)) rotate(720deg);
                 opacity: 0;
             }
         }
@@ -1943,12 +1965,19 @@
         }
 
         // Create snowflakes
-        function createSnowflakes(count = 50) {
+        function createSnowflakes(count = 50, windSpeed = 0) {
             const snowflakesContainer = document.getElementById('snowflakes');
             snowflakesContainer.innerHTML = ''; // Clear existing
             const snowflakeChars = ['❄', '❅', '❆', '✻', '✼', '❋'];
             
-            for (let i = 0; i < count; i++) {
+            // Calculate how many snowflakes should come from the side based on wind
+            // At 25 m/s wind, 50% come from side; at 10 m/s, 20% come from side
+            const sideRatio = Math.min(windSpeed / 50, 0.5);
+            const sideCount = Math.floor(count * sideRatio);
+            const topCount = count - sideCount;
+            
+            // Create snowflakes falling from top
+            for (let i = 0; i < topCount; i++) {
                 const snowflake = document.createElement('div');
                 snowflake.className = 'snowflake';
                 snowflake.textContent = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
@@ -1956,6 +1985,23 @@
                 snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
                 // Set base duration as CSS variable, wind will modify via multiplier
                 snowflake.style.setProperty('--base-duration', (Math.random() * 10 + 10) + 's');
+                snowflake.style.animationDelay = Math.random() * 10 + 's';
+                snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+                snowflakesContainer.appendChild(snowflake);
+            }
+            
+            // Create snowflakes entering from the left side (wind-blown)
+            for (let i = 0; i < sideCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake from-side';
+                snowflake.textContent = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
+                snowflake.style.left = '-5%'; // Start off-screen left
+                snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
+                // Random starting Y position (can start anywhere from top to middle of screen)
+                const startY = Math.random() * 50;
+                snowflake.style.setProperty('--start-y', startY + 'vh');
+                snowflake.style.top = startY + 'vh';
+                snowflake.style.setProperty('--base-duration', (Math.random() * 8 + 8) + 's');
                 snowflake.style.animationDelay = Math.random() * 10 + 's';
                 snowflake.style.opacity = Math.random() * 0.5 + 0.3;
                 snowflakesContainer.appendChild(snowflake);
@@ -2147,10 +2193,10 @@
             }
             
             // Always create snow
-            createSnowflakes(snowAmount);
+            const windSpeed = weather.windSpeed || 0;
+            createSnowflakes(snowAmount, windSpeed);
             
             // Apply wind effects
-            const windSpeed = weather.windSpeed || 0;
             applyWindEffects(windSpeed);
         }
 
