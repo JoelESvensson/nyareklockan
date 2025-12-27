@@ -411,6 +411,21 @@
             .weather-indicator .weather-temp {
                 font-size: 1.1rem;
             }
+
+            /* Larger, more visible snowflakes on mobile */
+            .snowflake {
+                font-size: 1.5rem !important;
+                opacity: 0.9 !important;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Medium-sized snowflakes for tablets */
+            .snowflake {
+                font-size: 1.3rem;
+                opacity: 0.85;
+            }
         }
 
         /* Main content */
@@ -1969,17 +1984,17 @@
             const snowflakes = document.getElementById('snowflakes');
             const raindrops = document.getElementById('raindrops');
             
-            // Calculate drift: 0 m/s = 0vw, 25 m/s = 60vw (linear scale)
+            // Calculate drift: 0 m/s = 0vw, 25 m/s = 100vw (steeper angle)
             // This makes snowflakes fall at an increasing angle
-            const drift = Math.min(windSpeed * 2.4, 60);
+            const drift = Math.min(windSpeed * 4, 100);
             const driftValue = drift + 'vw';
             
-            // Rain angle: 0 m/s = 0deg, 25 m/s = 45deg
-            const angle = Math.min(windSpeed * 1.8, 45);
+            // Rain angle: 0 m/s = 0deg, 25 m/s = 60deg (steeper)
+            const angle = Math.min(windSpeed * 2.4, 60);
             const angleValue = angle + 'deg';
             
-            // Speed multiplier: 0 m/s = 1x, 25 m/s = 2.5x faster
-            const speedMultiplier = 1 + (windSpeed / 16.67);
+            // Speed multiplier: 0 m/s = 1x, 25 m/s = 4x faster (more dramatic)
+            const speedMultiplier = 1 + (windSpeed / 8.33);
             
             // Apply CSS custom properties for dynamic wind effect
             snowflakes.style.setProperty('--wind-drift', driftValue);
