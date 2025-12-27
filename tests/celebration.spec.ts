@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Celebration Mode', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
   });
 
   test('celebration element exists in DOM', async ({ page }) => {
@@ -39,7 +39,7 @@ test.describe('Celebration Mode', () => {
 test.describe('Celebration Activation via Dev Panel', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
   });
 
   test.afterEach(async ({ page }) => {
