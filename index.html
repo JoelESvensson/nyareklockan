@@ -2514,7 +2514,7 @@
         
         // Memory configuration
         // MEMORIES_START_TIME is calculated after REAL_MEMORIES is defined
-        const MEMORY_DISPLAY_DURATION = 10000; // Show each memory for 10 seconds
+        const MEMORY_DISPLAY_DURATION = 20000; // Show each memory for 20 seconds
         const MEMORY_INTERVAL = 60000; // Show a new memory every minute
         
         // Swedish month names
@@ -2696,7 +2696,7 @@
                 video.src = src;
                 video.autoplay = true;
                 video.muted = true;
-                video.loop = false;
+                video.loop = true;
                 video.playsInline = true;
                 // Detect portrait orientation when metadata loads
                 video.addEventListener('loadedmetadata', () => {
