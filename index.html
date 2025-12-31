@@ -1309,6 +1309,20 @@
             color: #00ff00;
         }
 
+        .dev-hidden .dev-toggle,
+        .dev-hidden .dev-panel {
+            display: none !important;
+        }
+
+        .dev-panel .hide-dev-btn {
+            background: #8b0000;
+            margin-top: 10px;
+        }
+
+        .dev-panel .hide-dev-btn:hover {
+            background: #a00;
+        }
+
         /* Responsive - Tablets and small laptops */
         @media (max-width: 768px) {
             .time-value {
@@ -1700,6 +1714,8 @@
         </div>
         
         <div class="hint">Press D to toggle this panel</div>
+        
+        <button id="dev-hide-permanently" class="hide-dev-btn">🚫 Hide Dev Mode</button>
     </div>
 
     <script>
@@ -1737,6 +1753,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             const devPanel = document.getElementById('dev-panel');
             const devToggle = document.getElementById('dev-toggle');
+            const devHideBtn = document.getElementById('dev-hide-permanently');
+            
+            // Check if dev mode was hidden
+            if (localStorage.getItem('devModeHidden') === 'true') {
+                document.body.classList.add('dev-hidden');
+            }
             const devPreset = document.getElementById('dev-time-preset');
             const devCustomTime = document.getElementById('dev-custom-time');
             const devApplyCustom = document.getElementById('dev-apply-custom');
@@ -1758,6 +1780,14 @@
             
             devToggle.addEventListener('click', () => {
                 devPanel.classList.toggle('visible');
+            });
+            
+            // Hide dev mode permanently
+            devHideBtn.addEventListener('click', () => {
+                if (confirm('Hide dev mode? You can restore it by clearing localStorage.')) {
+                    localStorage.setItem('devModeHidden', 'true');
+                    document.body.classList.add('dev-hidden');
+                }
             });
             
             // Preset selection
