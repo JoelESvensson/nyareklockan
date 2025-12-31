@@ -2483,7 +2483,7 @@
         // ==========================================
         
         // Memory configuration
-        const MEMORIES_START_TIME = 60 * 60 * 1000; // Start showing memories 1 hour before
+        // MEMORIES_START_TIME is calculated after REAL_MEMORIES is defined
         const MEMORY_DISPLAY_DURATION = 10000; // Show each memory for 10 seconds
         const MEMORY_INTERVAL = 60000; // Show a new memory every minute
         
@@ -2567,6 +2567,9 @@
             'memories/2025-2-emelie.jpg',
             'memories/2025-3-emelie.jpg'
         ];
+        
+        // Calculate start time based on number of memories (1 memory per minute)
+        const MEMORIES_START_TIME = REAL_MEMORIES.length * 60 * 1000;
         
         // Placeholder memories (gradient backgrounds with icons for each month)
         const PLACEHOLDER_MEMORIES = [
@@ -2875,19 +2878,19 @@
                 stopRapidMemories();
             }
             
-            // NORMAL MODE: Last hour but not final 1 minute
+            // NORMAL MODE: Last N minutes (based on memory count) but not final 1 minute
             if (distance <= MEMORIES_START_TIME && distance > 60 * 1000) {
                 memoriesActive = true;
                 
-                // Calculate which minute we're in (counting down from 60)
+                // Calculate which minute we're in (counting down from memory count)
                 const minutesRemaining = Math.floor(distance / 60000);
                 
                 // Show a new memory when the minute changes
                 if (minutesRemaining !== lastMemoryMinute) {
                     lastMemoryMinute = minutesRemaining;
                     
-                    // Cycle through memories
-                    currentMemoryIndex = (60 - minutesRemaining) % REAL_MEMORIES.length;
+                    // Calculate memory index: first memory at MEMORIES_START_TIME, last memory at 1 minute
+                    currentMemoryIndex = (REAL_MEMORIES.length - minutesRemaining) % REAL_MEMORIES.length;
                     
                     // Short delay to make the transition feel more natural
                     setTimeout(() => {
