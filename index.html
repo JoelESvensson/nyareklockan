@@ -2613,11 +2613,9 @@
             'memories/2025-3-emelie.jpg'
         ];
         
-        // Start showing memories at 15:23 (8 hours 37 minutes before midnight)
-        const MEMORIES_START_TIME = (8 * 60 + 37) * 60 * 1000; // 8h 37min in ms
-        const MEMORIES_END_TIME = 60 * 60 * 1000; // Stop normal memories 1 hour before midnight
-        const MEMORIES_WINDOW = MEMORIES_START_TIME - MEMORIES_END_TIME; // Total window for showing memories
-        const MEMORY_INTERVAL_MS = Math.floor(MEMORIES_WINDOW / REAL_MEMORIES.length); // Time between each memory
+        // Start showing memories 12 hours before midnight, one per minute, looping
+        const MEMORIES_START_TIME = 12 * 60 * 60 * 1000; // 12 hours in ms
+        const MEMORIES_END_TIME = 60 * 1000; // Stop normal memories 1 minute before midnight
         
         // Placeholder memories (gradient backgrounds with icons for each month)
         const PLACEHOLDER_MEMORIES = [
@@ -2926,21 +2924,20 @@
                 stopRapidMemories();
             }
             
-            // NORMAL MODE: From 15:23 to 1 hour before midnight (memories spread evenly)
+            // NORMAL MODE: From 12 hours before midnight to 1 minute before, 1 memory per minute looping
             if (distance <= MEMORIES_START_TIME && distance > MEMORIES_END_TIME) {
                 memoriesActive = true;
                 
-                // Calculate which memory to show based on elapsed time in the window
-                const elapsedInWindow = MEMORIES_START_TIME - distance;
-                const memoryIndex = Math.min(
-                    Math.floor(elapsedInWindow / MEMORY_INTERVAL_MS),
-                    REAL_MEMORIES.length - 1
-                );
+                // Calculate which minute we're in
+                const minutesRemaining = Math.floor(distance / 60000);
                 
-                // Show a new memory when the index changes
-                if (memoryIndex !== lastShownMemoryIndex) {
-                    lastShownMemoryIndex = memoryIndex;
-                    currentMemoryIndex = memoryIndex;
+                // Show a new memory when the minute changes
+                if (minutesRemaining !== lastShownMemoryIndex) {
+                    lastShownMemoryIndex = minutesRemaining;
+                    
+                    // Calculate minutes elapsed since start and loop through memories
+                    const minutesElapsed = Math.floor((MEMORIES_START_TIME - distance) / 60000);
+                    currentMemoryIndex = minutesElapsed % REAL_MEMORIES.length;
                     
                     // Short delay to make the transition feel more natural
                     setTimeout(() => {
