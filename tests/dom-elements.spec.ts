@@ -84,6 +84,6 @@ test.describe('DOM Elements', () => {
 
   test('train countdown exists', async ({ page }) => {
     await expect(page.locator('#train-countdown')).toBeAttached();
-    await expect(page.locator('.train-title')).toContainText('Nattåget');
+    await expect(page.locator('.train-title')).toContainText('Tåget');
   });
 });
