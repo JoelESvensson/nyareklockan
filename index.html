@@ -2514,27 +2514,58 @@
         // Real memory files from the memories folder (sorted chronologically)
         const REAL_MEMORIES = [
             'memories/januari.mp4',
+            'memories/januari-zlatan.jpg',
+            'memories/januari-åre.jpeg',
             'memories/februari.mp4',
             'memories/februari-champagne.mp4',
             'memories/februari-fjäll.jpg',
+            'memories/februari-storlien.jpg',
             'memories/februari-tuva.jpg',
             'memories/februari-zlatan.jpg',
             'memories/mars.jpg',
+            'memories/mars-2025.jpeg',
+            'memories/mars-gaspy.jpeg',
             'memories/mars-hotell-riksgränsen.jpg',
+            'memories/mars-jämtland.jpeg',
+            'memories/mars-mari.jpg',
             'memories/mars-narvik.jpg',
             'memories/mars-riksgränsen.jpg',
+            'memories/mars-riksgränsen.jpeg',
+            'memories/april-söderort-tuva.jpg',
+            'memories/maj-aspudden.jpg',
             'memories/maj-båt.jpg',
+            'memories/maj-sessions.jpeg',
             'memories/maj-sessions.mp4',
+            'memories/maj-tuva-2.jpeg',
+            'memories/juni-2025.jpeg',
             'memories/juni-midsommar.jpg',
             'memories/juni-student.jpg',
+            'memories/juni-sälen.jpg',
             'memories/juli.jpg',
+            'memories/juli-dumstrut.jpg',
+            'memories/juli-grisslehamn.jpg',
+            'memories/juli-malin.jpeg',
             'memories/juli-oasis.jpg',
             'memories/juli-paris.jpg',
             'memories/juli-passfail.jpg',
+            'memories/augusti-malin.jpeg',
+            'memories/augusti-malin-2.jpeg',
+            'memories/augusti-midsommarkransen.jpg',
             'memories/september-bröllop.jpg',
             'memories/september-brölop.jpg',
-            'memories/tuva-september.jpg',
-            'memories/november-gunter.mp4'
+            'memories/september-malin.jpeg',
+            'memories/september-tuva.jpg',
+            'memories/oktober-huddinge.jpg',
+            'memories/oktober-huddinge-2.jpg',
+            'memories/oktober-malin.jpeg',
+            'memories/november-gunter.mp4',
+            'memories/november-slakthuskyrkan.mp4',
+            'memories/december-södermalm.jpeg',
+            'memories/december-åre.mp4',
+            'memories/vinter-häst.mp4',
+            'memories/2025-emelie.jpg',
+            'memories/2025-2-emelie.jpg',
+            'memories/2025-3-emelie.jpg'
         ];
         
         // Placeholder memories (gradient backgrounds with icons for each month)
@@ -2563,10 +2594,35 @@
         let rapidMemoryMode = false;
         let rapidMemoryInterval = null;
         
-        // Parse month from filename (e.g., "january.jpg" -> "Januari")
+        // Season names in Swedish
+        const SEASON_NAMES_SV = {
+            'vinter': 'Vinter',
+            'vår': 'Vår',
+            'sommar': 'Sommar',
+            'höst': 'Höst'
+        };
+        
+        // Parse month/year/season from filename (e.g., "january.jpg" -> { label: "Januari", isYear: false })
         function getMonthFromFilename(filename) {
             const name = filename.toLowerCase().split('.')[0].split('-')[0].split('_')[0];
-            return MONTH_NAMES_SV[name] || name.charAt(0).toUpperCase() + name.slice(1);
+            
+            // Check if it's a year (4 digits)
+            if (/^\d{4}$/.test(name)) {
+                return { label: name, isYear: true };
+            }
+            
+            // Check if it's a season
+            if (SEASON_NAMES_SV[name]) {
+                return { label: SEASON_NAMES_SV[name], isYear: true }; // isYear=true to skip ", 2025" suffix
+            }
+            
+            // Check if it's a month
+            if (MONTH_NAMES_SV[name]) {
+                return { label: MONTH_NAMES_SV[name], isYear: false };
+            }
+            
+            // Default: capitalize first letter
+            return { label: name.charAt(0).toUpperCase() + name.slice(1), isYear: false };
         }
         
         // Create a placeholder memory element
@@ -2628,13 +2684,16 @@
             let monthName;
             
             // Use real memories if available
+            let isYearOrSeason = false;
             if (REAL_MEMORIES.length > 0) {
                 const memoryPath = REAL_MEMORIES[memoryIndex % REAL_MEMORIES.length];
                 const filename = memoryPath.split('/').pop();
                 const isVideo = /\.(mp4|webm)$/i.test(filename);
                 
                 memoryEl = createRealMemory(memoryPath, isVideo);
-                monthName = getMonthFromFilename(filename);
+                const parsed = getMonthFromFilename(filename);
+                monthName = parsed.label;
+                isYearOrSeason = parsed.isYear;
             } else {
                 // Fall back to placeholders
                 const memory = PLACEHOLDER_MEMORIES[memoryIndex % PLACEHOLDER_MEMORIES.length];
@@ -2644,8 +2703,8 @@
             
             container.appendChild(memoryEl);
             
-            // Set caption
-            caption.textContent = `${monthName}, 2025`;
+            // Set caption (don't add ", 2025" if it's already a year or season)
+            caption.textContent = isYearOrSeason ? monthName : `${monthName}, 2025`;
             
             // Show overlay
             overlay.classList.add('active');
